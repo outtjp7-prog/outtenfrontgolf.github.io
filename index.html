@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outt En Front — Show Up and Play.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1B3A2D;
+    --forest-mid: #2D6A4A;
+    --forest-light: #4A8C68;
+    --cream: #F7F0E3;
+    --cream-dark: #EDE3CC;
+    --gold: #B8904A;
+    --gold-light: #D4AA6A;
+    --ink: #1A1A1A;
+    --mist: #6B7B72;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--forest);
+    padding: 52px 56px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 40px solid rgba(255,255,255,0.04);
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 40%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 30px solid rgba(255,255,255,0.03);
+  }
+
+  .header-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 58px;
+    letter-spacing: -1px;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .brand span {
+    color: var(--gold-light);
+  }
+
+  .tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .header-right {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .score-decoration {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  .hole {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.35;
+  }
+
+  .hole-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .hole-dots {
+    display: flex;
+    gap: 3px;
+  }
+
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+  }
+
+  .dot.filled { background: var(--gold-light); opacity: 1; }
+
+  /* ── GOLD STRIPE ── */
+  .gold-stripe {
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+
+  /* ── INTRO ── */
+  .intro {
+    padding: 44px 56px 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+
+  .intro-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--forest);
+  }
+
+  .intro-headline em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .intro-body {
+    font-size: 12.5px;
+    color: var(--mist);
+    line-height: 1.75;
+  }
+
+  .intro-body strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ── PACKAGES ── */
+  .packages {
+    padding: 40px 56px 36px;
+  }
+
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  .tiers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .tier {
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .tier-header {
+    padding: 16px 20px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .tier-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+
+  .tier-score {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-top: 2px;
+  }
+
+  .tier-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: right;
+    line-height: 1;
+  }
+
+  .tier-price span {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  .tier-divider {
+    height: 1px;
+    opacity: 0.15;
+    margin: 0 20px;
+  }
+
+  .tier-body {
+    padding: 14px 20px 18px;
+  }
+
+  .tier-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 7px;
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+
+  .tier-item::before {
+    content: '—';
+    flex-shrink: 0;
+    margin-top: 0;
+    font-size: 11px;
+  }
+
+  /* PAR */
+  .tier-par {
+    background: #fff;
+    border: 1.5px solid var(--cream-dark);
+  }
+  .tier-par .tier-header { background: #fff; }
+  .tier-par .tier-name { color: var(--forest); }
+  .tier-par .tier-score { color: var(--mist); }
+  .tier-par .tier-price { color: var(--forest); }
+  .tier-par .tier-divider { background: var(--forest); }
+  .tier-par .tier-item { color: var(--mist); }
+  .tier-par .tier-item::before { color: var(--cream-dark); }
+
+  /* BIRDIE */
+  .tier-birdie {
+    background: var(--forest);
+  }
+  .tier-birdie .tier-header { background: var(--forest); }
+  .tier-birdie .tier-name { color: #fff; }
+  .tier-birdie .tier-score { color: rgba(255,255,255,0.5); }
+  .tier-birdie .tier-price { color: var(--gold-light); }
+  .tier-birdie .tier-price span { color: rgba(255,255,255,0.5); }
+  .tier-birdie .tier-divider { background: rgba(255,255,255,0.3); }
+  .tier-birdie .tier-item { color: rgba(255,255,255,0.75); }
+  .tier-birdie .tier-item::before { color: var(--gold-light); }
+
+  /* EAGLE */
+  .tier-eagle {
+    background: var(--forest-mid);
+    grid-column: 1;
+  }
+  .tier-eagle .tier-header { background: var(--forest-mid); }
+  .tier-eagle .tier-name { color: #fff; }
+  .tier-eagle .tier-score { color: rgba(255,255,255,0.5); }
+  .tier-eagle .tier-price { color: var(--gold-light); }
+  .tier-eagle .tier-price span { color: rgba(255,255,255,0.5); }
+  .tier-eagle .tier-divider { background: rgba(255,255,255,0.2); }
+  .tier-eagle .tier-item { color: rgba(255,255,255,0.8); }
+  .tier-eagle .tier-item::before { color: var(--gold-light); }
+
+  /* ALBATROSS */
+  .tier-albatross {
+    background: linear-gradient(135deg, #0F2318, #1B3A2D);
+    grid-column: 2;
+    grid-row: 2;
+    position: relative;
+  }
+
+  .tier-albatross::before {
+    content: 'BEST';
+    position: absolute;
+    top: 14px; right: 14px;
+    font-size: 8px;
+    letter-spacing: 2px;
+    background: var(--gold);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  .tier-albatross .tier-header { background: transparent; }
+  .tier-albatross .tier-name { color: #fff; }
+  .tier-albatross .tier-score { color: var(--gold-light); opacity: 0.8; }
+  .tier-albatross .tier-price { color: var(--gold-light); }
+  .tier-albatross .tier-price span { color: rgba(255,255,255,0.4); }
+  .tier-albatross .tier-divider { background: var(--gold); opacity: 0.3; }
+  .tier-albatross .tier-item { color: rgba(255,255,255,0.8); }
+  .tier-albatross .tier-item::before { color: var(--gold-light); }
+
+  /* ── HOW IT WORKS ── */
+  .how {
+    margin: 0 56px;
+    padding: 32px 36px;
+    background: #fff;
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    border: 1.5px solid var(--cream-dark);
+  }
+
+  .how-section h3 {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .how-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 11.5px;
+    color: var(--mist);
+    line-height: 1.5;
+  }
+
+  .how-item::before {
+    content: '✓';
+    color: var(--forest-mid);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .how-item.no::before {
+    content: '✕';
+    color: #ccc;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 32px;
+    background: var(--forest);
+    padding: 36px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left .cta-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .footer-left .cta-sub {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.5);
+    font-style: italic;
+  }
+
+  .footer-contact {
+    text-align: right;
+  }
+
+  .contact-item {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 4px;
+  }
+
+  .contact-item a {
+    color: var(--gold-light);
+    text-decoration: none;
+  }
+
+  .signoff {
+    margin-top: 12px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: rgba(255,255,255,0.45);
+    text-align: right;
+  }
+
+  .signoff strong {
+    color: var(--gold-light);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; }
+    .page { max-width: 100%; box-shadow: none; }
+    @page { margin: 0; size: letter; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-inner">
+      <div>
+        <div class="brand">Outt <span>En</span> Front</div>
+        <div class="tagline">Show Up and Play.</div>
+      </div>
+      <div class="header-right">
+        <div class="score-decoration">
+          <div class="hole">
+            <span class="hole-name">Par</span>
+            <div class="hole-dots"><div class="dot filled"></div></div>
+          </div>
+          <div class="hole">
+            <span class="hole-name">Birdie</span>
+            <div class="hole-dots"><div class="dot filled"></div><div class="dot filled"></div></div>
+          </div>
+          <div class="hole">
+            <span class="hole-name">Eagle</span>
+            <div class="hole-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div>
+          </div>
+          <div class="hole" style="opacity:0.8">
+            <span class="hole-name" style="color:var(--gold-light)">Albatross</span>
+            <div class="hole-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gold-stripe"></div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <div class="intro-headline">
+      Golf trips should be <em>legendary.</em><br>
+      The planning shouldn't be.
+    </div>
+    <div class="intro-body">
+      Outt En Front handles every detail: courses, lodging, meals, transportation, pairings, games, and everything between the first tee time and the last round. <strong>You and your group bring the enthusiasm.</strong> We bring the rest.<br><br>
+      By the time you step on the first tee, your only job is to play well. If you can't do that, play fast. Either way, your worries? <strong>Over and Outten.</strong>
+    </div>
+  </div>
+
+  <!-- PACKAGES -->
+  <div class="packages">
+    <div class="section-label">The Packages</div>
+    <div class="tiers">
+
+      <div class="tier tier-par">
+        <div class="tier-header">
+          <div>
+            <div class="tier-name">Par</div>
+            <div class="tier-score">The Essentials</div>
+          </div>
+          <div class="tier-price">$50<span>per golfer</span></div>
+        </div>
+        <div class="tier-divider"></div>
+        <div class="tier-body">
+          <div class="tier-item">Course research, recommendations and tee time booking (3 courses over 3 days)</div>
+          <div class="tier-item">Lodging coordination: curated AirBnB/VRBO options, or on-site accommodations</div>
+          <div class="tier-item">Full trip itinerary, built and managed</div>
+          <div class="tier-item">Group communication handled start to finish</div>
+        </div>
+      </div>
+
+      <div class="tier tier-birdie">
+        <div class="tier-header">
+          <div>
+            <div class="tier-name">Birdie</div>
+            <div class="tier-score">Fully Handled</div>
+          </div>
+          <div class="tier-price">$75<span>per golfer</span></div>
+        </div>
+        <div class="tier-divider"></div>
+        <div class="tier-body">
+          <div class="tier-item">Everything in Par</div>
+          <div class="tier-item">Meal planning: local restaurant pick, one in-house cooking experience (i.e. Hibachi chef), one casual night in</div>
+          <div class="tier-item">Transportation coordination: party bus or group transport to and from courses</div>
+        </div>
+      </div>
+
+      <div class="tier tier-eagle">
+        <div class="tier-header">
+          <div>
+            <div class="tier-name">Eagle</div>
+            <div class="tier-score">The Full Experience</div>
+          </div>
+          <div class="tier-price">$100<span>per golfer</span></div>
+        </div>
+        <div class="tier-divider"></div>
+        <div class="tier-body">
+          <div class="tier-item">Everything in Birdie</div>
+          <div class="tier-item">Custom group pairings: competitive, balanced, or chaos</div>
+          <div class="tier-item">Game formats: best ball, scramble, singles match play, and more</div>
+          <div class="tier-item">Gambling structures: Calcutta design, Ryder Cup Style, side bets, CTP, long drive</div>
+        </div>
+      </div>
+
+      <div class="tier tier-albatross">
+        <div class="tier-header">
+          <div>
+            <div class="tier-name">Albatross</div>
+            <div class="tier-score">Premium Routing</div>
+          </div>
+          <div class="tier-price">$125<span>per golfer</span></div>
+        </div>
+        <div class="tier-divider"></div>
+        <div class="tier-body">
+          <div class="tier-item">Everything in Eagle</div>
+          <div class="tier-item">Lunch coordinated and ready at the turn: no waiting, no wasted time — just refuel and go</div>
+          <div class="tier-item">Premium 5 course itinerary: 36 holes day 1, 36 holes day 2, 18 holes day 3</div>
+          <div class="tier-item">Custom commemorative swag: ball marks, t-shirts, hats</div>
+          <div class="tier-item">Tee time logistics handled end to end: 5 courses, 3 days, zero headaches</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how">
+    <div class="how-section">
+      <h3>What's Always Included</h3>
+      <div class="how-item">One point of contact — me, start to finish</div>
+      <div class="how-item">Group communication and logistics management</div>
+      <div class="how-item">Budget conscious planning. Share a per person budget and I'll build the best trip it can buy</div>
+      <div class="how-item">Have a must-play course or a game format your group swears by? Tell me upfront and I'll build the trip around it</div>
+      <div class="how-item">15 years of hard-won planning knowledge</div>
+    </div>
+    <div class="how-section">
+      <h3>What's Never Included in the Fee</h3>
+      <div class="how-item no">Green fees, cart fees, or course charges</div>
+      <div class="how-item no">Lodging costs (Airbnb, hotel, etc.)</div>
+      <div class="how-item no">Meal and bar tabs</div>
+      <div class="how-item no">Transportation costs</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      <div class="cta-headline">Ready to stop planning<br>and start playing?</div>
+      <div class="cta-sub">Tell me where, how many, when, and your per person budget. I'll handle the rest.</div>
+      <div class="cta-sub" style="margin-top:8px; font-size:10.5px; opacity:0.6;">Minimum 12 golfers. All packages subject to course availability.</div>
+    </div>
+    <div class="footer-contact">
+      <div class="contact-item"><a href="mailto:outtjp7@gmail.com">outtjp7@gmail.com</a></div>
+      <div class="contact-item">(252) 741-0108</div>
+      <div class="signoff">Over &amp; Outten, <strong>John Outten</strong></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
